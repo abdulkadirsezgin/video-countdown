@@ -412,39 +412,63 @@
   // ============================
   // 1) TEK SEFERLİK BUTON + KİLİTLİ MESAJ
   // ============================
-  const KEY = "one_shot_message_v1";
+const KEY = "one_shot_awards_2025";
 
-  const groups = [
-    ["Bavul", "seyahat", "ev tadilatı", "toplantı"],
-    ["coin", "uyku", "fırtına"],
-    ["evlilik", "lider", "koşu"],
-    ["yemek", "kızlar", "seramik atölyesi"],
-    ["i20N", "yarış", "kıvırcık köprücüklü kızlar"],
-    ["Fındık", "fıstık", "sensin", "yastık"],
-    ["Saitama", "kol kası", "3D resim"],
-  ];
+// 1️⃣ KATEGORİ LİSTELERİ
+const testBuddies = [
+  "Çağlar",
+  "Özgür",
+  "Çağlar & Özgür (efsane ikili)",
+  "Test sırasında ortaya çıkan gizli kahraman",
+  "Toplantıda her şeyi çözen kişi"
+];
 
-  function pick(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
+const infrastructures = [
+  "i20N + yarış + kıvırcık köprücüklü kızlar",
+  "ev tadilatı + bavul + seyahat kaosu",
+  "ray üstü test ekipmanı (titreşimli)",
+  "kamyon + arazi + test modu",
+  "seramik atölyesi altyapısı (!)"
+];
 
-  function buildMessage(){
-    // 2 farklı gruptan tema çekip “komik test raporu” üretelim
-    const gA = pick(groups);
-    let gB = pick(groups);
-    // aynı gelirse bir daha seç
-    if (gB === gA) gB = pick(groups);
+const sleepAwards = [
+  "coin sonrası gelen derin uyku",
+  "fırtına varken edilen huzurlu uyku",
+  "toplantı iptali sonrası uyku",
+  "test bitince yastığa gömülme uykusu",
+  "‘yarın bakarız’ uykusu"
+];
 
-    const a1 = pick(gA), a2 = pick(gA);
-    const b1 = pick(gB), b2 = pick(gB);
+const unforgettableMoments = [
+  "yemek + kızlar + seramik atölyesi günü",
+  "i20N ile yapılan efsane sürüş",
+  "fındık fıstık sensin yastık anı",
+  "liderlik modunda koşu",
+  "Saitama seviyesinde kol kası hissedilen an"
+];
 
-    const templates = [
-      `🧪 Test Sonucu: "${a1} + ${a2}" modülü çalıştı. Yan etki: "${b1}" tetiklendi, "${b2}" sahaya indi.`,
-      `🚦 Raydaki ekipman raporu: "${a1}" titreşimi arttırdı, "${a2}" kararı verdi. Çözüm: "${b1}" ile "${b2}" arasında denge.`,
-      `🧩 Simülasyon çıktı: Önce "${a1}", sonra "${a2}". Finalde "${b1}" geldi ve ortam "${b2}" oldu.`,
-      `🛠️ Operasyon notu: "${a1}" hazır. "${a2}" devrede. Eğer "${b1}" olursa, hemen "${b2}" protokolü!`,
-      `🎛️ Kontrol paneli dedi ki: "${a1}" + "${a2}" = stabil. Ama "${b1}" yüzünden "${b2}" riski var 😄`,
-    ];
-    return pick(templates);
-  }
+// 2️⃣ YARDIMCI
+function pick(arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+// 3️⃣ ANA MESAJ
+function buildAwardMessage() {
+  return `
+🏆 2025'in en iyi test buddy'si:
+👉 ${pick(testBuddies)}
+
+🏗️ 2025'in en iyi altyapısı:
+👉 ${pick(infrastructures)}
+
+😴 2025'in en iyi uykusu:
+👉 ${pick(sleepAwards)}
+
+📸 2025'in unutulmaz anı:
+👉 ${pick(unforgettableMoments)}
+`.trim();
+}
+
 
   const btn = document.getElementById("btn");
   const bar = document.getElementById("bar");
