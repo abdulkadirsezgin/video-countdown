@@ -174,6 +174,19 @@
       left: 0%;
       transition: left .45s ease-in-out; /* metronom hissi */
     }
+     .ray-label{
+      position: absolute;
+      inset: 0;                /* kutunun tamamını kaplar */
+      display: flex;
+      align-items: center;     /* dikey ortalama */
+      justify-content: center; /* yatay ortalama */
+      font-weight: 900;
+      letter-spacing: .6px;
+      font-size: 14px;
+      color: rgba(233,241,255,.9);
+      pointer-events: none;
+      text-shadow: 0 2px 8px rgba(0,0,0,.6);
+    }
     .carriage::before{
       content:""; position:absolute; left: 12px; right: 12px; top: 12px; height: 10px;
       border-radius: 999px;
@@ -396,6 +409,10 @@
       <div class="layer rail">
         <div class="track"></div>
         <div class="carriage" id="carriage"></div>
+        <div class="ray-label" id="rayLabel">
+  ⏳ Geri Sayım
+</div>
+
       </div>
 
       <!-- Ray test modülü yazısının altına geri sayım -->
@@ -640,6 +657,13 @@ if (v) v.play().catch(()=>{});
     // even -> sol, odd -> sağ
     const maxLeft = "calc(100% - 180px)";
     carriage.style.left = (secs % 2 === 0) ? "0%" : maxLeft;
+    const rayLabel = document.getElementById("rayLabel");
+  if (rayLabel) {
+    rayLabel.style.transform =
+      (secs % 2 === 0)
+        ? "translateX(-6px) rotate(-6deg)"
+        : "translateX(6px) rotate(6deg)";
+  }
   }
 
   let videoTriggered = false;
