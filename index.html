@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>2025 Ödülleri • Mekanik Tema</title>
+  <title>Abdul Kadir Sezgin Ödül Töreni</title>
   <style>
     :root{
       --bg1:#0b1220; --bg2:#101a2f;
@@ -46,7 +46,7 @@
     /* ===== Mekanik sahne ===== */
     .stage{
       position: relative;
-      height: 320px;
+      height: 360px;
       border-radius: var(--radius);
       background: rgba(255,255,255,.05);
       border: 1px solid var(--stroke);
@@ -152,10 +152,10 @@
 
     /* Ray + ekipman */
     .rail{
-      position:absolute; left: 50%; bottom: 32px;
+      position:absolute; left: 50%; bottom: 92px;
       transform: translateX(-50%);
       width: min(860px, 96%);
-      height: 110px;
+      height: 120px;
     }
     .track{
       position:absolute; left: 0; right: 0; top: 58px;
@@ -166,11 +166,13 @@
     }
     .carriage{
       position:absolute; top: 28px;
-      width: 160px; height: 62px; border-radius: 18px;
+      width: 180px; height: 62px; border-radius: 18px;
       border: 1px solid rgba(255,255,255,.14);
       background: rgba(15,27,51,.70);
       box-shadow: 0 18px 30px rgba(0,0,0,.35);
-      animation: slide 4.2s ease-in-out infinite;
+      transform: translateZ(0);
+      left: 0%;
+      transition: left .45s ease-in-out; /* metronom hissi */
     }
     .carriage::before{
       content:""; position:absolute; left: 12px; right: 12px; top: 12px; height: 10px;
@@ -184,9 +186,54 @@
       font-size: 11px; letter-spacing: 1px;
       color: rgba(233,241,255,.75);
     }
-    @keyframes slide{
-      0%,100%{ left: 0%; }
-      50%{ left: calc(100% - 160px); }
+
+    /* Ray altı geri sayım kutusu */
+    .countbox{
+      position:absolute; left: 50%; bottom: 18px;
+      transform: translateX(-50%);
+      width: min(860px, 96%);
+      padding: 12px 14px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(15,27,51,.55);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 16px 30px rgba(0,0,0,.30);
+    }
+    .countrow{
+      display:flex; gap:10px; align-items:center; justify-content:space-between;
+      flex-wrap:wrap;
+    }
+    .counttitle{
+      font-weight: 900;
+      letter-spacing: .3px;
+      color: rgba(233,241,255,.92);
+    }
+    .time{
+      font-variant-numeric: tabular-nums;
+      font-weight: 1000;
+      letter-spacing: 1px;
+      font-size: 18px;
+    }
+    .small{
+      color: rgba(233,241,255,.70);
+      font-size: 12px;
+      margin-top: 6px;
+    }
+    .countbar{
+      margin-top: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.12);
+      overflow:hidden;
+    }
+    .countfill{
+      height: 100%;
+      width: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--ok), var(--danger));
+      border-radius: 999px;
+      transition: width .6s ease;
+      box-shadow: 0 0 22px rgba(140,255,193,.16);
     }
 
     /* Ön panel */
@@ -245,7 +292,7 @@
       border: 1px solid rgba(255,255,255,.10);
       font-size: 15px;
       line-height: 1.45;
-      min-height: 116px;
+      min-height: 130px;
       display:flex;
       align-items:flex-start;
       white-space: pre-line;
@@ -268,7 +315,7 @@
     button:active{ transform: scale(.98); }
     button[disabled]{ opacity:.45; cursor:not-allowed; }
 
-    /* Spotlight */
+    /* Spotlight + Confetti (aynı) */
     .spotlight{
       position: fixed; inset:0;
       pointer-events:none;
@@ -281,8 +328,6 @@
       backdrop-filter: blur(1px);
     }
     .spotlight.on{ opacity:1; }
-
-    /* Confetti */
     .confetti{
       position: fixed; inset: 0;
       pointer-events:none;
@@ -297,8 +342,29 @@
       opacity: .95;
       animation: fall linear forwards;
     }
-    @keyframes fall{
-      to{ transform: translateY(110vh) rotate(540deg); opacity: 1; }
+    @keyframes fall{ to{ transform: translateY(110vh) rotate(540deg); opacity: 1; } }
+
+    /* Video placeholder */
+    .videoBox{
+      margin-top: 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.06);
+      padding: 12px;
+    }
+    .frame{
+      position: relative;
+      width:100%;
+      padding-top: 56.25%;
+      border-radius: 14px;
+      overflow:hidden;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.25);
+    }
+    .frame video, .frame iframe{
+      position:absolute; inset:0;
+      width:100%; height:100%;
+      border:0;
     }
   </style>
 </head>
@@ -306,8 +372,8 @@
 <body>
   <div class="wrap">
     <div class="top">
-      <div class="badge"><span class="dot"></span> Mekanik Tema: Çark • Eyleyici • Ray</div>
-      <div class="badge" id="state">🎲 Ödül: Hazır</div>
+      <div class="badge"><span class="dot"></span> Abdul Kadir Sezgin Ödül Töreni</div>
+      <div class="badge" id="state">🎲 Tahmin: Hazır</div>
     </div>
 
     <div class="stage">
@@ -329,34 +395,59 @@
 
       <div class="layer rail">
         <div class="track"></div>
-        <div class="carriage"></div>
+        <div class="carriage" id="carriage"></div>
+      </div>
+
+      <!-- Ray test modülü yazısının altına geri sayım -->
+      <div class="countbox" aria-label="countdown">
+        <div class="countrow">
+          <div class="counttitle">⏳ Geri Sayım</div>
+          <div class="time" id="timeText">--g --s --d --sn</div>
+        </div>
+        <div class="countbar"><div class="countfill" id="countFill"></div></div>
+        <div class="small" id="targetText">Hedef: --</div>
       </div>
     </div>
 
     <div class="panel">
+      <!-- SOL: Mini ödül töreni -->
       <div class="card">
         <div class="pad">
           <h1>2025 Mini Ödül Töreni</h1>
           <p class="sub">
             Butona 1 kere bas → bar dolar → 4 kategoride sonuç gelir ve <b>kilitlenir</b>.
             LocalStorage yok; sonuç URL’ye <b>#pick=</b> olarak yazılır.
+            (Listeleri sen vereceksin.)
           </p>
 
           <div class="progress"><div class="bar" id="bar"></div></div>
 
           <div class="btnrow">
-            <button id="btn">🏁 Ödülleri Açıkla</button>
+            <button id="btn">🏁 Tahmini Açıkla</button>
           </div>
 
           <div class="funbox" id="msg">Henüz açıklanmadı.</div>
         </div>
       </div>
 
+      <!-- SAĞ: Video alanı -->
       <div class="card">
         <div class="pad">
-          <h1>Listeler</h1>
-          <p class="sub">İstersen buradaki listeleri büyütürüz; her kullanıcı kendi “evreninde” rastgele seçer, kimse kimseyi etkilemez.</p>
-          <div class="funbox" style="opacity:.9;">✨ Sonuç geldiğinde: Spotlight + konfeti aktif olur.</div>
+          <h1>Video Alanı</h1>
+          <p class="sub">Buraya MP4 / YouTube gelecek. (Tarih gelince otomatik açılacak şekilde bağlayacağız.)</p>
+
+          <div class="videoBox">
+                   
+            <div class="frame" id="videoFrame">
+  <video id="mp4" controls style="width:100%; height:100%;" preload="metadata">
+ <source src="video.mp4" type="video/mp4">
+    Tarayıcınız video oynatmayı desteklemiyor.
+  </video>
+</div>
+            <div class="small" style="margin-top:8px;">
+              Not: MP4 için <code>video.mp4</code> dosyasını repo’ya koyup burayı <code>&lt;video&gt;</code> ile değiştiriyoruz.
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -367,47 +458,16 @@
 
 <script>
   // ============================
-  // KATEGORİ LİSTELERİ
+  // AYARLAR
   // ============================
-  const testBuddies = [
-    "Çağlar",
-    "Özgür",
-    "Çağlar & Özgür (efsane ikili)",
-    "Toplantıdan sağ çıkan test buddy",
-    "Ray üzerinde koşan gizli kahraman"
-  ];
-
-  const infrastructures = [
-    "Bavul + seyahat + toplantı (mobil altyapı)",
-    "Ev tadilatı sırasında kurulan geçici test standı",
-    "i20N ile yarış ruhu (altyapı: gaz 😄)",
-    "Seramik atölyesi disiplin altyapısı",
-    "Fındık-fıstık-sensin-yastık stabilizasyonu"
-  ];
-
-  const sleepAwards = [
-    "Coin sonrası ‘kapanış’ uykusu",
-    "Uyku + fırtına = sinematik uyku",
-    "Toplantı iptali sonrası ödül uykusu",
-    "Tadilat bitince gelen ‘nihayet’ uykusu",
-    "Saitama kol kası sonrası ‘drop’ uyku"
-  ];
-
-  const unforgettableMoments = [
-    "Yemek + kızlar + seramik atölyesi günü",
-    "i20N + yarış + kahkaha anı",
-    "Fındık-fıstık-sensin-yastık efsanesi",
-    "Evlilik + lider + koşu = hayat patch’i",
-    "Coin-uyku-fırtına üçlemesi: unutulmaz"
-  ];
+  // Geri sayım hedefi (İstanbul saati +03:00 ile)
+  // İstersen burayı değiştir:
+  const TARGET_ISO = "2025-11-20T22:50:00+03:00";
 
   // ============================
-  // URL HASH ile localStorage'sız kilitleme
-  // - Eğer #pick= varsa onu kullan
-  // - Yoksa butona basınca üret ve #pick= yaz
+  // URL HASH ile localStorage'sız kilitleme (tahmin)
   // ============================
   function mulberry32(seed){
-    // deterministik PRNG
     let t = seed >>> 0;
     return function(){
       t += 0x6D2B79F5;
@@ -416,24 +476,27 @@
       return ((x ^ (x >>> 14)) >>> 0) / 4294967296;
     };
   }
-
   function getPickSeedFromHash(){
     const m = location.hash.match(/(?:^|#|&)pick=(\d+)/);
     return m ? parseInt(m[1], 10) : null;
   }
-
   function setPickSeedToHash(seed){
-    // sadece pick'i yaz (mevcut hash’i ezelim: basit kalsın)
     location.hash = "pick=" + String(seed);
   }
-
   function pickWithRng(arr, rnd){
     return arr[Math.floor(rnd() * arr.length)];
   }
 
+  // ============================
+  // (ŞİMDİLİK) DUMMY listeler — sen grupları verince burayı güncelleyeceğim
+  // ============================
+  const testBuddies = ["(liste gelecek)"];
+  const infrastructures = ["(liste gelecek)"];
+  const sleepAwards = ["(liste gelecek)"];
+  const unforgettableMoments = ["(liste gelecek)"];
+
   function buildAwardMessage(seed){
     const rnd = mulberry32(seed);
-
     return `
 🏆 2025'in en iyi test buddy'si:
 👉 ${pickWithRng(testBuddies, rnd)}
@@ -481,28 +544,24 @@
     btn.disabled = true;
     bar.style.width = "100%";
     msg.textContent = buildAwardMessage(seed);
-    state.textContent = "🔒 Ödül: Kilitlendi";
+    state.textContent = "🔒 Tahmin: Kilitlendi";
     spot.classList.add("on");
     launchConfetti();
-    // spotlight bir süre sonra kısalsın
     setTimeout(()=> spot.classList.remove("on"), 4200);
   }
 
-  // Sayfa açılışında hash varsa direkt kilitle
+  // Hash varsa direkt kilitle
   const existingSeed = getPickSeedFromHash();
   if(existingSeed !== null){
     lockUI(existingSeed);
   }
 
   btn.addEventListener("click", () => {
-    // zaten kilitliyse hiçbir şey yapma
-    const seedNow = getPickSeedFromHash();
-    if(seedNow !== null) return;
+    if(getPickSeedFromHash() !== null) return;
 
     btn.disabled = true;
-    state.textContent = "⚙️ Ödül: Hesaplanıyor…";
+    state.textContent = "⚙️ Tahmin: Hesaplanıyor…";
 
-    // Bar dolsun
     let p = 0;
     const timer = setInterval(() => {
       p += 8 + Math.random()*10;
@@ -511,7 +570,6 @@
         bar.style.width = "100%";
         clearInterval(timer);
 
-        // Seed üret: zaman + biraz rastgele
         const seed = (Date.now() ^ (Math.random()*1e9)) >>> 0;
         setPickSeedToHash(seed);
         lockUI(seed);
@@ -520,6 +578,65 @@
       }
     }, 120);
   });
+
+  // ============================
+  // GERİ SAYIM + RAY METRONOM HAREKETİ
+  // ============================
+  const target = new Date(TARGET_ISO).getTime();
+  const timeText = document.getElementById("timeText");
+  const targetText = document.getElementById("targetText");
+  const countFill = document.getElementById("countFill");
+  const carriage = document.getElementById("carriage");
+
+  // progress için toplam süreyi sayfa açılış anına göre sabitliyoruz
+  const startNow = Date.now();
+  const totalSpan = Math.max(1, target - startNow);
+
+  const fmt = new Intl.DateTimeFormat("tr-TR", {
+    dateStyle: "full",
+    timeStyle: "short",
+    timeZone: "Europe/Istanbul"
+  });
+  targetText.textContent = "Hedef: " + fmt.format(new Date(TARGET_ISO)) + " (İstanbul saati)";
+
+  function pad2(n){ return String(n).padStart(2,"0"); }
+
+  function tickCountdown(){
+    const now = Date.now();
+    const diff = target - now;
+
+    if(diff <= 0){
+      timeText.textContent = "00g 00s 00d 00sn";
+      countFill.style.width = "0%";
+      // metronom durdur: ortada kalsın
+      carriage.style.left = "calc(50% - 90px)";
+      const v = document.getElementById("mp4");
+if (v) v.play().catch(()=>{});
+
+      return;
+    }
+
+    const totalSec = Math.floor(diff/1000);
+    const days = Math.floor(totalSec / (3600*24));
+    const hours = Math.floor((totalSec % (3600*24)) / 3600);
+    const mins  = Math.floor((totalSec % 3600) / 60);
+    const secs  = totalSec % 60;
+
+    timeText.textContent = `${pad2(days)}g ${pad2(hours)}s ${pad2(mins)}d ${pad2(secs)}sn`;
+
+    // Alttaki bar giderek azalsın
+    const remaining = Math.max(0, diff);
+    const ratio = Math.max(0, Math.min(1, remaining / totalSpan));
+    countFill.style.width = (ratio * 100).toFixed(1) + "%";
+
+    // Metronom: saniyeye göre sağ-sol (geri sayım saniyesi azaldıkça “tik”)
+    // even -> sol, odd -> sağ
+    const maxLeft = "calc(100% - 180px)";
+    carriage.style.left = (secs % 2 === 0) ? "0%" : maxLeft;
+  }
+
+  tickCountdown();
+  setInterval(tickCountdown, 1000);
 </script>
 </body>
 </html>
