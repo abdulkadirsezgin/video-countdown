@@ -187,18 +187,27 @@
       pointer-events: none;
       text-shadow: 0 2px 8px rgba(0,0,0,.6);
     }
+    
     .carriage::before{
       content:""; position:absolute; left: 12px; right: 12px; top: 12px; height: 10px;
       border-radius: 999px;
       background: linear-gradient(90deg, rgba(140,255,193,.25), rgba(102,227,255,.18), rgba(255,209,102,.18));
       opacity:.85;
     }
-    .carriage::after{
-      content:"KSTB 👊🔫";
-      position:absolute; left: 12px; bottom: 10px;
-      font-size: 11px; letter-spacing: 1px;
-      color: rgba(233,241,255,.75);
-    }
+     .carriage::after{
+  content:"KSTB 👊🔫";
+  position: absolute;
+  inset: 0;                      /* tüm kutuyu kapla */
+  display: flex;
+  align-items: center;           /* dikey ortala */
+  justify-content: center;       /* yatay ortala */
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: rgba(233,241,255,.75);
+  pointer-events: none;
+  text-align: center;
+}
+
 
     /* Ray altı geri sayım kutusu */
     .countbox{
@@ -409,11 +418,7 @@
       <div class="layer rail">
         <div class="track"></div>
         <div class="carriage" id="carriage"></div>
-        <div class="ray-label" id="rayLabel">
-  ⏳ Geri Sayım
-</div>
-
-      </div>
+          </div>
 
       <!-- Ray test modülü yazısının altına geri sayım -->
       <div class="countbox" aria-label="countdown">
@@ -657,13 +662,7 @@ if (v) v.play().catch(()=>{});
     // even -> sol, odd -> sağ
     const maxLeft = "calc(100% - 180px)";
     carriage.style.left = (secs % 2 === 0) ? "0%" : maxLeft;
-    const rayLabel = document.getElementById("rayLabel");
-  if (rayLabel) {
-    rayLabel.style.transform =
-      (secs % 2 === 0)
-        ? "translateX(-6px) rotate(-6deg)"
-        : "translateX(6px) rotate(6deg)";
-  }
+ 
   }
 
   let videoTriggered = false;
