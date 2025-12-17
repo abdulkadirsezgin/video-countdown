@@ -436,14 +436,14 @@
           <h1>Video Alanı</h1>
           <p class="sub">Buraya MP4 / YouTube gelecek. (Tarih gelince otomatik açılacak şekilde bağlayacağız.)</p>
 
-          <div class="videoBox">
-                   
+         <div class="videoBox" id="videoBox" style="display:none;">
             <div class="frame" id="videoFrame">
   <video id="mp4" controls style="width:100%; height:100%;" preload="metadata">
  <source src="video.mp4" type="video/mp4">
     Tarayıcınız video oynatmayı desteklemiyor.
   </video>
 </div>
+   
             <div class="small" style="margin-top:8px;">
               Not: MP4 için <code>video.mp4</code> dosyasını repo’ya koyup burayı <code>&lt;video&gt;</code> ile değiştiriyoruz.
             </div>
@@ -462,7 +462,7 @@
   // ============================
   // Geri sayım hedefi (İstanbul saati +03:00 ile)
   // İstersen burayı değiştir:
-  const TARGET_ISO = "2025-12-18T00:35:00+03:00";
+  const TARGET_ISO = "2025-12-18T01:30:00+03:00";
 
   // ============================
   // URL HASH ile localStorage'sız kilitleme (tahmin)
@@ -614,8 +614,10 @@
   if (!videoTriggered) {
     videoTriggered = true;
 
-    const v = document.getElementById("mp4");
-    if (v) v.play().catch(()=>{});
+const box = document.getElementById("videoBox");
+if (box) box.style.display = "block";
+const v = document.getElementById("mp4");
+if (v) v.play().catch(()=>{});
 
     if (countdownTimer) clearInterval(countdownTimer);
   }
