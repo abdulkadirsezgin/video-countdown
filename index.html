@@ -605,16 +605,23 @@
     const now = Date.now();
     const diff = target - now;
 
-    if(diff <= 0){
-      timeText.textContent = "00g 00s 00d 00sn";
-      countFill.style.width = "0%";
-      // metronom durdur: ortada kalsın
-      carriage.style.left = "calc(50% - 90px)";
-      const v = document.getElementById("mp4");
-if (v) v.play().catch(()=>{});
 
-      return;
-    }
+    if (diff <= 0) {
+  timeText.textContent = "00g 00s 00d 00sn";
+  countFill.style.width = "0%";
+  carriage.style.left = "calc(50% - 90px)";
+
+  if (!videoTriggered) {
+    videoTriggered = true;
+
+    const v = document.getElementById("mp4");
+    if (v) v.play().catch(()=>{});
+
+    if (countdownTimer) clearInterval(countdownTimer);
+  }
+  return;
+}
+
 
     const totalSec = Math.floor(diff/1000);
     const days = Math.floor(totalSec / (3600*24));
@@ -634,6 +641,9 @@ if (v) v.play().catch(()=>{});
     const maxLeft = "calc(100% - 180px)";
     carriage.style.left = (secs % 2 === 0) ? "0%" : maxLeft;
   }
+
+  let videoTriggered = false;
+  let countdownTimer = null;
 
   tickCountdown();
   setInterval(tickCountdown, 1000);
