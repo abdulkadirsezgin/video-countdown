@@ -510,19 +510,44 @@
   // ============================
   // (ŞİMDİLİK) DUMMY listeler — sen grupları verince burayı güncelleyeceğim
   // ============================
-  const testBuddies = ["(liste","mjmj"];
-  const infrastructures = ["(liste gelecek)"];
-  const sleepAwards = ["(liste gelecek)"];
-  const unforgettableMoments = ["(liste gelecek)"];
+  const testBuddies = [
+  "Vulkan Yurdabach","Quader Yuelmess","I.V.Rouscan","Hazelnad","Dr.Mami",
+  "Mr.Chopper","Abel Cagel Segin","Osgoore Strudy"
+];
 
-  function buildAwardMessage(seed){
-    const rnd = mulberry32(seed);
-    return `
+const Active = [
+  "Suck and Hide","Hazal the Cherry Lady","Unverified FIMA"
+];
+
+const sleepAwards = [
+  "Öğle yemeği sonrası dinlenme odasında",
+  "Mesaide masabaşında",
+  "Müdürlük toplantısı kolon arkasında",
+  "50.yıl konseri balkonda",
+  "İstanbul-Ankara otoyolu üzerinde",
+  "20. cag bittiğinde"
+];
+
+const unforgettableMoments = [
+  "Bolşevikler",
+  "Tak Tak Tak !!",
+  "Tost Makinesi istiyoruz",
+  "Uykusuz Şetkar Geceleri",
+  "Dr. Mami and Mommy Issues",
+  "Ben Cag insanı değilim !",
+  "Amansız deniz görevleri (📍Marmaris)",
+  "Dursun ve Civcivi",
+  "ThreeWheel 🛞"
+];
+
+function buildAwardMessage(seed){
+  const rnd = mulberry32(seed);
+  return `
 🏆 2025'in en iyi test buddy'si:
 👉 ${pickWithRng(testBuddies, rnd)}
 
 🏗️ 2025'in en iyi altyapısı:
-👉 ${pickWithRng(infrastructures, rnd)}
+👉 ${pickWithRng(Active, rnd)}
 
 😴 2025'in en iyi uykusu:
 👉 ${pickWithRng(sleepAwards, rnd)}
