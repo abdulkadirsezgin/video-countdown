@@ -516,7 +516,7 @@
 ];
 
 const Active = [
-  "Suck and Hide","Hazal the Cherry Lady","Unverified FIMA"
+  "Suck and Hide","Hazal the Cherry Lady","Unverified FIMA","Kıdemli Lider","Şetkar"
 ];
 
 const sleepAwards = [
@@ -537,16 +537,43 @@ const unforgettableMoments = [
   "Ben Cag insanı değilim !",
   "Amansız deniz görevleri (📍Marmaris)",
   "Dursun ve Civcivi",
-  "ThreeWheel 🛞"
+  "ThreeWheel 🛞",
+  "Abi sen.. sıkıntılısın."
+];
+  const Evlilik = [
+  "Kır Düğünü",
+ "Salon Düğunü",
+ "Kumsal Düğünü",
+    "Sade Nikah",
+    "Kış Lastiği",
+"PPF Kaplama"
+];
+
+  const GenZ = [
+  "Red Flag",
+ "Slay Queen",
+ "Cringe",
+    "Gashlighting",
+    "Fast Fashion",
+"Shiplemek",
+    "Banger"
+];
+
+  const oz = [
+  "Çağlar"
+];
+
+  const N = [
+  "en iyisi N"
 ];
 
 function buildAwardMessage(seed){
   const rnd = mulberry32(seed);
   return `
-🏆 2025'in en iyi test buddy'si:
+🏆 2025'in en orijinal karakteri:
 👉 ${pickWithRng(testBuddies, rnd)}
 
-🏗️ 2025'in en iyi altyapısı:
+🏗️ 2025'in en çok gezeni:
 👉 ${pickWithRng(Active, rnd)}
 
 😴 2025'in en iyi uykusu:
@@ -554,6 +581,20 @@ function buildAwardMessage(seed){
 
 📸 2025'in unutulmaz anı:
 👉 ${pickWithRng(unforgettableMoments, rnd)}
+
+💻 2025'te CÇ'nin Google en çok arananı:
+👉 ${pickWithRng(Evlilik, rnd)}
+
+👅 2025'te KSSTB'nin bilemedigi kelime:
+👉 ${pickWithRng(GenZ, rnd)}
+
+🚬 2025'in en özgürü:
+👉 ${pickWithRng(oz, rnd)}
+
+🏎 2025'in en iyisi:
+👉 ${pickWithRng(N, rnd)}
+
+
 `.trim();
   }
 
